@@ -6,7 +6,7 @@ runAs: root
 shell: bash
 
 steps:
-  - type: Command
+  - type1: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
     command: |
