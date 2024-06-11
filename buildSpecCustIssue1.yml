@@ -3,9 +3,7 @@ component: build
 timeoutInSeconds: 6000
 shell: bash
 failImmediatelyOnError: true
-env:
-  vaultVariables:
-    scheme_password : ${scheme_password}
+
 steps:
   - type: Command
     name: "Create Database and PLSQL objects"
@@ -17,7 +15,6 @@ steps:
       export JAVA_HOME=/etc/alternatives/jre_11_openjdk
       export PATH=$JAVA_HOME/bin:$PATH
       echo "Path is :" $PATH
-      sh ${OCI_PRIMARY_SOURCE_DIR}/ODI_CICD/PLSQL/GDEE/database_master.sh ${wallet_name} ${schema_name} ${scheme_password} ${tns_name}    
     onFailure:
       - type: Command
         command: echo "Creation of DB objects failed"
@@ -34,7 +31,6 @@ steps:
       export JAVA_HOME=/etc/alternatives/jre_11_openjdk
       export PATH=$JAVA_HOME/bin:$PATH
       echo "Path is :" $PATH
-      sh ${OCI_PRIMARY_SOURCE_DIR}/ODI_CICD/APEX/PreProd/create_apex_app.sh ${wallet_name} ${schema_name} ${scheme_password} ${tns_name}    
     onFailure:
       - type: Command
         command: echo "Deployment of APEX application is failed"
